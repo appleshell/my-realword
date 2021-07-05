@@ -39,13 +39,18 @@ module.exports = {
               component: resolve(__dirname, 'pages/editor')
             },
             {
-              path: '/artical/:slug',
-              name: 'artical',
+              path: '/article/:slug',
+              name: 'article',
               component: resolve(__dirname, 'pages/article')
             },
           ]
         }
       ])
     }
-  }
+  },
+  // 注册插件
+  plugins: [
+    './plugins/request.js',
+    './plugins/dayjs.js'
+  ]
 }

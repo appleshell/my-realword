@@ -124,7 +124,7 @@
 <script>
 import { getArticles } from './api'
 export default {
-  name: 'artical',
+  name: 'article',
   async asyncData () {
     const { data } = await getArticles()
     console.log(data)
