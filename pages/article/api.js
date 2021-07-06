@@ -1,3 +1,5 @@
 import { request } from '../../plugins/request'
 
-export const getArticles = (params) => request.get('/api/articles', { params })
+export const getArticleDetail = slug => request.get(`/api/articles/${slug}`)
+
+export const getComments = slug => request.get(`/api/articles/${slug}/comments`)
