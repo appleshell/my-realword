@@ -72,7 +72,6 @@ export default {
         } else {
           userRes = await register({ user })
         }
-        console.log(userRes)
         this.$store.commit('setUser', userRes.data.user)
 
         Cookie.set('user', userRes.data.user)
