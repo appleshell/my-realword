@@ -21,9 +21,9 @@
               </nuxt-link>
             </li>
             <li class="nav-item">
-              <nuxt-link class="nav-link" to="/profile/123">
-                <img class="user-pic" :src="user.image" alt="">
-                {{user.username}}
+              <nuxt-link class="nav-link" :to="`/profile/${user.username}`">
+                <img class="user-pic" :src="user.image" alt="" />
+                {{ user.username }}
               </nuxt-link>
             </li>
           </template>
@@ -45,7 +45,8 @@
       <div class="container">
         <a href="/" class="logo-font">conduit</a>
         <span class="attribution">
-          An interactive learning project from <a href="https://thinkster.io">Thinkster</a>. Code &amp; design licensed under MIT.
+          An interactive learning project from <a href="https://thinkster.io">Thinkster</a>. Code
+          &amp; design licensed under MIT.
         </span>
       </div>
     </footer>
@@ -56,8 +57,8 @@
 import { mapState } from 'vuex'
 export default {
   computed: {
-    ...mapState(['user'])
-  }
+    ...mapState(['user']),
+  },
 }
 </script>
 
