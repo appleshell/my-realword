@@ -3,7 +3,7 @@
     <div class="banner">
       <div class="container">
         <h1 class="logo-font">conduit</h1>
-        <p>A place to share your knowledge. day day up</p>
+        <p>A place to share your knowledge. Good Good Study, Day Day Up</p>
       </div>
     </div>
 
@@ -13,78 +13,48 @@
           <div class="feed-toggle">
             <ul class="nav nav-pills outline-active">
               <li v-if="user" class="nav-item">
-                <nuxt-link
-                  exact
-                  class="nav-link"
-                  :class="{ active: tab === 'your_feed' }"
-                  :to="{ name: 'home', query: { tab: 'your_feed' } }"
-                  >Your Feed</nuxt-link
-                >
+                <nuxt-link exact class="nav-link" :class="{ active: tab === 'your_feed' }" :to="{ name: 'home', query: { tab: 'your_feed' } }">Your Feed</nuxt-link>
               </li>
               <li class="nav-item">
-                <nuxt-link
-                  exact
-                  class="nav-link"
-                  :class="{ active: tab === 'global_feed' }"
-                  :to="{ name: 'home', query: { tab: 'global_feed' } }"
-                  >Global Feed</nuxt-link
-                >
+                <nuxt-link exact class="nav-link" :class="{ active: tab === 'global_feed' }" :to="{ name: 'home', query: { tab: 'global_feed' } }">Global Feed</nuxt-link>
               </li>
               <li class="nav-item" v-if="tag">
-                <nuxt-link
-                  class="nav-link"
-                  :class="{ active: tab === 'tag' }"
-                  :to="{ name: 'home', query: { tab: 'tag', tag } }"
-                  >#{{ tag }}</nuxt-link
-                >
+                <nuxt-link class="nav-link" :class="{ active: tab === 'tag' }" :to="{ name: 'home', query: { tab: 'tag', tag } }">#{{ tag }}</nuxt-link>
               </li>
             </ul>
           </div>
 
           <div class="article-preview" v-for="article in articles" :key="article.slug">
             <div class="article-meta">
-              <nuxt-link
-                :to="{
+              <nuxt-link :to="{
                   name: 'profile',
                   params: {
                     username: article.author.username,
                   },
-                }"
-              >
+                }">
                 <img :src="article.author.image" />
               </nuxt-link>
               <div class="info">
-                <nuxt-link
-                  class="author"
-                  :to="{
+                <nuxt-link class="author" :to="{
                     name: 'profile',
                     params: {
                       username: article.author.username,
                     },
-                  }"
-                >
+                  }">
                   {{ article.author.username }}
                 </nuxt-link>
                 <span class="date">{{ article.createdAt | date('MMM DD, YYYY') }}</span>
               </div>
-              <button
-                class="btn btn-outline-primary btn-sm pull-xs-right"
-                :class="{ active: article.favorited }"
-                @click="onFavorite(article)"
-                :disabled="article.favoriteDisabled"
-              >
+              <button class="btn btn-outline-primary btn-sm pull-xs-right" :class="{ active: article.favorited }" @click="onFavorite(article)" :disabled="article.favoriteDisabled">
                 <i class="ion-heart"></i> {{ article.favoritesCount }}
               </button>
             </div>
-            <nuxt-link
-              :to="{
+            <nuxt-link :to="{
                 name: 'article',
                 params: {
                   slug: article.slug,
                 },
-              }"
-              class="preview-link"
-            >
+              }" class="preview-link">
               <h1>{{ article.title }}</h1>
               <p>{{ article.description }}</p>
               <span>Read more...</span>
@@ -93,24 +63,15 @@
 
           <nav>
             <ul class="pagination">
-              <li
-                class="page-item"
-                :class="{ active: item === pageNum }"
-                v-for="item in totalPage"
-                :key="item"
-              >
-                <nuxt-link
-                  class="page-link"
-                  :to="{
+              <li class="page-item" :class="{ active: item === pageNum }" v-for="item in totalPage" :key="item">
+                <nuxt-link class="page-link" :to="{
                     name: 'home',
                     query: {
                       pageNum: item,
                       tag,
                       tab,
                     },
-                  }"
-                  >{{ item }}</nuxt-link
-                >
+                  }">{{ item }}</nuxt-link>
               </li>
             </ul>
           </nav>
@@ -121,18 +82,13 @@
             <p>Popular Tags</p>
 
             <div class="tag-list">
-              <nuxt-link
-                v-for="tag in tags"
-                :key="tag"
-                :to="{
+              <nuxt-link v-for="tag in tags" :key="tag" :to="{
                   name: 'home',
                   query: {
                     tag,
                     tab: 'tag',
                   },
-                }"
-                class="tag-pill tag-default"
-              >
+                }" class="tag-pill tag-default">
                 {{ tag }}
               </nuxt-link>
             </div>
@@ -150,7 +106,7 @@ import { mapState } from 'vuex'
 export default {
   name: 'homePage',
   watchQuery: ['pageNum', 'tag', 'tab'],
-  async asyncData({ query, store }) {
+  async asyncData ({ query, store }) {
     const pageSize = 10
     const pageNum = Number(query.pageNum || 1)
     const { state } = store
@@ -185,13 +141,13 @@ export default {
     }
   },
   computed: {
-    totalPage() {
+    totalPage () {
       return Math.ceil(this.articlesCount / this.pageSize)
     },
     ...mapState(['user']),
   },
   methods: {
-    async onFavorite(article) {
+    async onFavorite (article) {
       if (!this.user) return alert('请先登录')
       article.favoriteDisabled = true
       if (article.favorited) {
